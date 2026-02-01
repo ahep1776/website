@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    // Environment setup & latest features
+    "lib": ["ESNext"],
+    "target": "ESNext",
+    "module": "node16", // "Preserve" from bun init
+    "moduleResolution": "node16", // "force" from bun init
+    "jsx": "react-jsx",
+    "allowJs": true,
+
+    "include": [
+      "metalsmith.ts",
+      "lib/**/*.ts",
+    ],
+
+    "exclude": [
+      "node_modules/**",
+      "content/**",
+      "build/**",
+    ],
+
+    // Bundler mode
+    // "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+
+    // Best practices
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+
+    // Some stricter flags (disabled by default)
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false
+  }
+}

@@ -1,0 +1,60 @@
+# --- Global Build Settings ---
+[build]
+  # Tell Netlify to use Bun to run your metalsmith script
+  command = "bun run build"
+  
+  # Metalsmith's output directory
+  publish = "build"
+  
+  # Where your serverless functions (for email verification) will live
+  functions = "netlify/functions"
+
+# --- Environment Variables ---
+[build.environment]
+  # Ensures Netlify uses the latest Bun version
+  BUN_VERSION = "latest"
+  # Keeps Node at a modern version for the Functions runtime
+  NODE_VERSION = "20"
+
+[build.processing]
+  skip_processing = false
+[build.processing.html]
+  pretty_urls = true
+[build.processing.css]
+  bundle = false   # Let Bun handle your CSS/SASS bundling
+  minify = true    # TODO - consider having Bun handle minification?
+[build.processing.js]
+  bundle = false   # Let Bun handle your TS/JS bundling
+  minify = true    # TODO - consider having Bun handle minification?
+
+# --- Context-Specific Settings ---
+
+# Production: Applied when merging to the 'main' branch
+[context.production]
+  environment = { NODE_ENV = "production" }
+
+# Deploy Previews: Applied to Pull Requests
+[context.deploy-preview]
+  command = "bun run build"
+  environment = { NODE_ENV = "development" }
+
+# Branch Deploys: Applied to any other branch (like 'develop')
+[context.branch-deploy]
+  environment = { NODE_ENV = "development" }
+
+# --- Redirects & Security ---
+[[redirects]]
+  # Ensure your Metalsmith-generated index.html files 
+  # work nicely with clean URLs (e.g., /about instead of /about/index.html)
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+
+[[headers]]
+  # Basic security headers for your static site
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Content-Security-Policy = "upgrade-insecure-requests;"
