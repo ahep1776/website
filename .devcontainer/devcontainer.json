@@ -1,10 +1,35 @@
 {
-  "forwardPorts": [8000],
-  "portsAttributes": {
-    "8000": {
-      "label": "Preview",
-      "onAutoForward": "openBrowser"
+  "name": "AHEP Website",
+  "image": "oven/bun:latest",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2.5.6": {},
+    "ghcr.io/devcontainers/features/git-lfs:1": {
+      "version": "latest"
     }
   },
-  "postCreateCommand": "bun install"
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "oven.bun-vscode",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "task.allowAutomaticTasks": "on",
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      }
+    }
+  },
+  "forwardPorts": [8000, 35729],
+  "portsAttributes": {
+    "8000": {
+      "label": "Website",
+      "onAutoForward": "silent"
+    },
+    "35729": {
+      "label": "LiveReload",
+      "onAutoForward": "silent",
+      "description": "Used by the server for hot module replacement"
+    }
+  },
+  "postCreateCommand": "git config --global --add safe.directory /workspaces/website && bun install"
 }

@@ -97,7 +97,7 @@ if (shouldCheckLinks) {
 if (shouldWatch) {
   metalsmith
       .use(livereload({debug: DEBUG}))
-      .use(serve({debug: DEBUG}))
+      .use(serve({debug: DEBUG, port: process.env.PORT || 8000}))
       .watch('src');
 }
 

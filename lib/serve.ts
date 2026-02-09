@@ -17,7 +17,7 @@ export function serve(opts: Options = {}): Metalsmith.Plugin {
     knownFiles = new Set(Object.keys(files));
     if (running) return done(null, files, ms);
     running = true;
-    const port = opts.port || 8000;
+    const port = opts.port || process.env.PORT || 8000;
     const types: Record<string, string> = {
       html: 'text/html',
       css: 'text/css',
