@@ -77,7 +77,7 @@ body {
   line-height: 1.6;
   
   @media (max-width: $mobile-threshold) {
-    font-size: 18px;
+    font-size: 22px;
   }
 }
 
@@ -150,15 +150,17 @@ section.title {
     color: $primary-color;
     
     @media (max-width: $mobile-threshold) {
-      font-size: 2rem;
+      font-size: 2.5rem;
     }
   }
 
   h3 {
     font-size: calc(1.75vw + 0.6rem);
+    max-width: 900px;
+    margin: 0 auto;
     
     @media (max-width: $mobile-threshold) {
-      font-size: 1.25rem;
+      font-size: 1.5rem;
     }
   }
 

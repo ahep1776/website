@@ -87,9 +87,22 @@ $accent-color: #3b8bc7;
 body {
   @media not print {
     margin: 10vmin;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    @media (max-width: 900px) {
+      margin: 1.5rem;
+    }
   }
   font-family: $body-font;
   color: var(--text-color);
+  font-size: 16px;
+  line-height: 1.6;
+  
+  @media (max-width: 600px) {
+    font-size: 22px;
+  }
 }
 
 h1, h2 {
@@ -103,12 +116,14 @@ h1 {
   text-align: center;
   text-transform: uppercase;
   color: $primary-color;
+  font-size: clamp(2.2rem, 5vw, 2.5rem);
 }
 h2 {
   text-transform: uppercase;
   color: var(--secondary-color);
   margin: 0;
   position: relative;
+  font-size: clamp(1.6rem, 4vw, 1.8rem);
 
   i, em {
     font-style: normal;
@@ -201,6 +216,29 @@ div.activities {
   display: grid;
   grid-template-columns:
     [activity] 1fr [time] max-content [freq] max-content [prep] max-content;
+  
+  @media (max-width: 600px) {
+    grid-template-columns: [activity] 1fr;
+    
+    & > div {
+      grid-column: activity !important;
+    }
+    
+    .header {
+      display: none;
+    }
+    
+    .activity {
+      grid-column: activity;
+      font-weight: bold;
+      margin-top: 1ex;
+    }
+    
+    .time, .freq, .prep {
+      font-size: 0.9em;
+      padding-left: 2em;
+    }
+  }
   .header {
     grid-row: 1;
     background: $accent-color;
@@ -270,18 +308,40 @@ div.activities {
 
 div.calendar {
   display: grid;
-  // grid-columns: 5;
+  grid-template-columns: repeat(5, 1fr);
+  
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+  
   .header {
     grid-row: 1;
     background: $primary-color;
     color: white;
     font-weight: bold;
+    
+    @media (max-width: 600px) {
+      margin-top: 1em;
+      font-size: 1.2em;
+      padding: 0.5em 0.4em;
+    }
   }
 
   & > * {
     margin: 0;
     padding: 1ex 0.4em;
     outline: 1px solid $primary-color;
+    
+    @media (max-width: 600px) {
+      outline: none;
+      outline-top: 2px solid $primary-color;
+      border-top: 2px solid $primary-color;
+      padding: 0.5ex 0.4em;
+
+      &.header {
+        border-top: none;
+      }
+    }
   }
 
   a {
